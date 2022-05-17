@@ -1,0 +1,115 @@
+ <div class="panel-body">
+        @foreach($detail->ProblemCommnets as $comment)
+        <ul class="media-list content-group-lg stack-media-on-mobile">
+         
+            <li class="media">
+                <div class="media-left">
+                    <a href="#"><img src="/global_assets/images/placeholders/placeholder.jpg" class="img-circle img-sm" alt=""></a>
+                </div>
+
+                <div class="media-body">
+                    <div class="media-heading">
+                        <a href="#" class="text-semibold">{{$comment->user->name}}</a>
+                        <span class="media-annotation dotted"> {{$comment->created_at}}</span>
+                    </div>
+
+                    <p>{{$comment->commnets_body}}</p>
+
+                    <ul class="list-inline list-inline-separate text-size-small">
+                        <li>70 <a href="#"><i class="icon-arrow-up22 text-success"></i></a><a href="#"><i class="icon-arrow-down22 text-danger"></i></a></li>
+                       
+                        <li><a    onclick="myFunction('panel-body-Reply-1')">Reply</a></li>
+                        <li><a    onclick="myFunction('panel-body-edit-1')">Edit</a></li>
+ 
+              
+					
+          {!! Form::open([null, 'id'=> 'panel-body-edit-1'  ,'style'=> "display:none" , 'method' => 'PUT']) !!}
+    
+           {!! Form::textarea('Edit' , null  ,['class' => 'form-control' , 'rows' => '4' , 'cols'=> '4']) !!}
+    
+           <div class="text-right">
+            <button type="submit" class="btn bg-blue"><i class="icon-plus22"></i> Add comment</button>
+              </div>
+           {!! Form::close() !!}
+
+                      
+                    </ul>
+                  
+						@if(!is_null($comment->ReplyCommnets))	
+                        @foreach($comment->ReplyCommnets as $reply)		
+                    <div class="media">
+                        <div class="media-left">
+                            <a href="#"><img src="/global_assets/images/placeholders/placeholder.jpg" class="img-circle img-sm" alt=""></a>
+                        </div>
+
+                        <div class="media-body">
+                            <div class="media-heading">
+                                <a href="#" class="text-semibold">{{$reply->user->name}}</a>
+                                <span class="media-annotation dotted">{{$reply->created_at}}</span>
+                            </div>
+
+                            <p>{{$reply->commnets_body}}</p>
+
+                            <ul class="list-inline list-inline-separate text-size-small">
+                                <li>67 <a href="#"><i class="icon-arrow-up22 text-success"></i></a><a href="#"><i class="icon-arrow-down22 text-danger"></i></a></li>
+                                <li><a    onclick="myFunction('panel-body-Reply-1')">Reply</a></li>
+                                <li><a    onclick="myFunction('panel-body-edit-2')">Edit</a></li>
+ 
+                                {!! Form::open([null, 'id'=> 'panel-body-edit-2'  ,'style'=> "display:none" , 'method' => 'PUT']) !!}
+    
+                         {!! Form::textarea('ReplyEdit' , null  ,['class' => 'form-control' , 'rows' => '4' , 'cols'=> '4']) !!}
+
+                            <div class="text-right">
+                               <button type="submit" class="btn bg-blue"><i class="icon-plus22"></i> Add comment</button>
+                           </div>
+                          {!! Form::close() !!}
+                            </ul>
+
+                         
+                           </div>
+                       
+                          </div>  
+                          </div>
+                
+                                          <br>
+									
+                                    {!! Form::open([null, 'id'=> 'panel-body-Reply-1'  ,'style'=> "display:none" , 'method' => 'PUT']) !!}
+        
+                                           
+                                            
+                                              {!! Form::textarea('Reply' , null  ,['class' => 'form-control' , 'rows' => '4' , 'cols'=> '4']) !!}
+                                              <br>
+                                            <div class="text-right">
+                                                <button type="submit" class="btn bg-blue"><i class="icon-plus22"></i> Add comment</button>
+                                            </div>
+                                            
+                                            
+                                                     
+                                        {!! Form::close() !!}
+                                  
+                          </div>   
+                         
+
+                </div>
+                
+                @endforeach
+             @endif
+            </li>
+
+            @endforeach
+        </ul>
+      
+        <h6 class="text-semibold"><i class="icon-pencil7 position-left"></i> Your comment</h6>
+        {!! Form::open(['route' => ['user.problem.comment.master',['userId'=> $detail->user_id  , 'problemId' => $detail->id ]], 'method' => 'POST']) !!}
+
+        <div class="content-group">
+            {!! Form::textarea('addcomment' , null  ,['class' => 'form-control' ,  'rows' => '4' , 'cols'=> '4']) !!}
+
+        </div>
+        
+        <div class="text-right">
+            <button type="submit" class="btn bg-blue"><i class="icon-plus22"></i> Add comment</button>
+        </div>
+
+        {!! Form::close() !!}
+    </div>

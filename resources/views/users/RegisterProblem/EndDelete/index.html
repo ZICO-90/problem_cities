@@ -1,0 +1,17 @@
+<select style="width:100%" onchange="this.form.submit()" name="is_active">
+                                                
+    <option value="1" {{$model->is_active_limit == 1 ? 'disabled selected' : ''}} >{{trans('Dashboard\delivery.Enable')}}</option>
+    <option value="0" {{$model->is_active_limit == 0 ? 'disabled selected' : ''}}>{{trans('Dashboard\delivery.Disbale')}}</option>
+    </select>
+
+    {!! Form::open([null, 'method' => 'PUT' ]) !!}
+
+    <select  onchange="this.form.submit()" name="is_active">
+                                                
+        <option value="1">جديد</option>
+        <option value="2">قيد المراجعه</option>
+        <option value="3">تمت المعيانه</option>
+        <option value="4">تم الاغلاق</option>
+        </select>
+
+    {!! Form::close() !!}
